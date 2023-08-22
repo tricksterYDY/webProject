@@ -8,13 +8,10 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
-def home(request):
+def about(request):
     posts=Post.objects.all()
     context = {'posts' : posts}
-    return render(request, 'blog/home.html', context)
-
-def about(request):
-    return render(request, 'blog/about.html')
+    return render(request, 'blog/about.html', context)
 
 def web01(request):
     return HttpResponse('<h1> Web01 page </h1>')
@@ -71,3 +68,4 @@ def delete_post(request,id):
         post.delete()
         messages.success(request,'The post has been deleted successfully.')
         return redirect('posts')
+

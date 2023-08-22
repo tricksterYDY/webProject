@@ -17,10 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from . import views
+from django.contrib.auth.models import User
 
 urlpatterns = [
-    path('', views.home, name="posts"),
-    path('about/', views.about, name='about'),
+
+    path('about',views.about, name="posts"),
     path('web01/', views.web01, name='web01'),
     path('web02/', views.web02, name='web02'),
     path('post/create',views.create_post, name='post-create'),

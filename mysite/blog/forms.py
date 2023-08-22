@@ -5,3 +5,4 @@ class PostForm(ModelForm):
     class Meta: #key-value
         model = Post
         fields = ['title', 'content', 'published_at', 'author'] #key
+

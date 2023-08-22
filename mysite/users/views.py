@@ -1,11 +1,19 @@
 from django.shortcuts import render, redirect
-from .forms import LoginForm, RegisterForm, ChangePW
+from .forms import LoginForm, RegisterForm, ChangePW, ResetPW, ProfileImageForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
+from PIL import Image
+from django.core.files import File
+from io import BytesIO
+from .models import Profile
+
+
 # Create your views here.
+
+def home(request):
+    return render(request,'users/home.html')
 
 # =========================== login / logout ===========================
 def sign_in(request):
@@ -64,3 +72,45 @@ def change_password(request):
     else :
         form=ChangePW(request.user)
     return render(request,'users/changePW.html',{'form':form})
+
+
+# def pw_reset(request):
+#     if request.method=='POST':
+#         form = PasswordResetForm(request.POST or None)
+#         if form.is_valid():
+#             form.save(
+#                 template_name='users/password_reset_form.html',
+#                 subject_template_name='users/password_reset_subject.txt',
+#                 email_template_name='users/password_reset_email.html',
+#                 request=request,
+#                 use_https=request.is_secure(),
+#             )
+#             messages.success(request,'이메일에 링크를 성공적으로 보냈습니다.')
+#             return redirect('login')
+#     else:
+#         form = PasswordResetForm(request)
+#     return render(request,'users/password_reset_form.html',{'form':form})
+
+#========================== 프로필 =============================
+@login_required
+def Myprofile(request):
+    user_profile=request.user.profile
+    if request.method == 'GET':
+        form = ProfileImageForm()
+        return render(request,'users/profile.html',{'form':form})
+    elif request.method == 'POST':
+        form = ProfileImageForm(request.POST, request.FILES, instance=user_profile)
+        if form.is_valid():
+            image=form.cleaned_data['image']
+            img=Image.open(image)
+            img = img.resize((200,200),Image.LANCZOS)
+            image_io = BytesIO()
+            img.save(image_io,format='PNG')
+            edited_img=File(image_io, name=image.name)
+            form.cleaned_data['image']=edited_img
+            form.save()
+            return redirect('posts')
+    else:
+        form = ProfileImageForm(instance=user_profile)
+    return render(request,'users/profile.html',{'form':form})
+
