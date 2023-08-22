@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+  <!-- =======================================================
+  * Template Name: MyPortfolio
+  * Updated: Jul 27 2023 with Bootstrap v5.3.1
+  * Template URL: https://bootstrapmade.com/myportfolio-bootstrap-portfolio-website-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+
+{% block content %}
+  <main id="main">
+
+    <section class="section pb-5">
+      <div class="container">
+        <div class="row mb-5 align-items-end">
+          <div class="col-md-6" data-aos="fade-up">
+
+            <h2>About Me</h2>
+            {% if request.user.is_authenticated %}
+              <p class="mb-0">Hello, {{request.user.username}}!</p>
+            {% else %}
+              <p> Hello, MiniHomepages</p>
+            {% endif %}
+          </div>
+        </div>
+
+          <div class="col-md-7 mb-5 mb-md-0" data-aos="fade-up">
+            <p><img src="{{ user.profile.image.url }}" alt="Image" class="img-fluid"></p>
+            <p>{{ request.user.username}}</p>
+              <hr>
+            <p>nickname : {{user.profile.nickname}}</p>
+            <p>email : {{user.email}}</p>
+            <p>자기소개 : {{user.profile.self_introduce}}</p>
+            <a href="{% url 'profile' %}">프로필 수정</a>
+          </div>
+      </div>
+    </section>
+  </main>
+  <!-- ======= Footer ======= -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <p class="mb-1">&copy; Copyright MiniHomePage</p>
+          <div class="credits">
+            <!--
+            All the links in the footer should remain intact.
+            You can delete the links only if you purchased the pro version.
+            Licensing information: https://bootstrapmade.com/license/
+            Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=MyPortfolio
+          -->
+            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+          </div>
+        </div>
+        <div class="col-sm-6 social text-md-end">
+          <a href="#"><span class="bi bi-twitter"></span></a>
+          <a href="#"><span class="bi bi-facebook"></span></a>
+          <a href="#"><span class="bi bi-instagram"></span></a>
+          <a href="#"><span class="bi bi-linkedin"></span></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+
+
+
+{% endblock %}

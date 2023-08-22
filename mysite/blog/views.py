@@ -11,13 +11,12 @@ from django.contrib.auth.decorators import login_required
 def about(request):
     posts=Post.objects.all()
     context = {'posts' : posts}
-    return render(request, 'blog/about.html', context)
+    return render(request, 'blog/me_profile.html', context)
 
-def web01(request):
-    return HttpResponse('<h1> Web01 page </h1>')
-
-def web02(request):
-    return HttpResponse('<h1> Web02 page </h1>')
+def home(request):
+    posts = Post.objects.all()
+    context = {'posts': posts}
+    return render(request, 'blog/home.html', context)
 
 #====================================
 
@@ -68,4 +67,3 @@ def delete_post(request,id):
         post.delete()
         messages.success(request,'The post has been deleted successfully.')
         return redirect('posts')
-

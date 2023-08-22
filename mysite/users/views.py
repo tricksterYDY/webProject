@@ -7,8 +7,6 @@ from django.contrib.auth.decorators import login_required
 from PIL import Image
 from django.core.files import File
 from io import BytesIO
-from .models import Profile
-
 
 # Create your views here.
 
@@ -31,7 +29,7 @@ def sign_in(request):
             if user is not None:
                 login(request, user)
                 messages.success(request,f'Hi {username.title()}, welcome back!')
-                return redirect('posts')
+                return redirect('home')
             else:
                 messages.error(request,"Invalid username or password")
                 return render(request, 'users/login.html',{'form' : form})
@@ -96,7 +94,7 @@ def change_password(request):
 def Myprofile(request):
     user_profile=request.user.profile
     if request.method == 'GET':
-        form = ProfileImageForm()
+        form = ProfileImageForm(instance=user_profile)
         return render(request,'users/profile.html',{'form':form})
     elif request.method == 'POST':
         form = ProfileImageForm(request.POST, request.FILES, instance=user_profile)
@@ -105,7 +103,7 @@ def Myprofile(request):
             img=Image.open(image)
             img = img.resize((200,200),Image.LANCZOS)
             image_io = BytesIO()
-            img.save(image_io,format='PNG')
+            img.save(image_io,format='JPEG')
             edited_img=File(image_io, name=image.name)
             form.cleaned_data['image']=edited_img
             form.save()

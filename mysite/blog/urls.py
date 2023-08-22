@@ -20,10 +20,8 @@ from . import views
 from django.contrib.auth.models import User
 
 urlpatterns = [
-
-    path('about',views.about, name="posts"),
-    path('web01/', views.web01, name='web01'),
-    path('web02/', views.web02, name='web02'),
+    path('',views.home, name="home"),
+    path('my_posts',views.about, name="posts"),
     path('post/create',views.create_post, name='post-create'),
     path('post/edit/<int:id>',views.edit_post, name="post-edit"),
     path('post/delete/<int:id>',views.delete_post,name="post-delete"),
