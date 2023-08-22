@@ -6,8 +6,8 @@ from django.db.models.signals import post_save
 class Profile(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)   # 유저는 하나의 프로필을 가질 수 있다. 1:1
     image = models.ImageField(default='default.jpg',upload_to='profile_pics')   #>>> user.profile.image.url # '/media/profile_pics/django.png'
-    nickname = models.CharField(max_length=60)
-    self_introduce = models.TextField()
+    nickname = models.CharField(max_length=60, default='default_nickname')
+    self_introduce = models.TextField(default='Hello world!')
     #음악, 캘린더 api
 
     def __str__(self):

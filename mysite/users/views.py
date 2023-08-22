@@ -37,14 +37,14 @@ def sign_in(request):
 def sign_out(request):
     logout(request)
     messages.success(request, f"You've been logged out")     
-    return redirect('posts')       
+    return redirect('login')
 
 
 # =========================== 회원등록 ===========================
 def sign_up(request,false=None):
     if request.method == 'GET':
         form = RegisterForm()
-        return render(request,'users/register.html',{'form':form})
+        return render(request,'users/register2.html',{'form':form})
     elif request.method == 'POST' :
         form = RegisterForm(request.POST)
         if form.is_valid():
@@ -55,7 +55,7 @@ def sign_up(request,false=None):
             login(request,user) #signup에 성공하면 그것을 이용해서 바로 로그인
             return redirect('posts')
         else : 
-            return render(request,'users/register.html',{'form':form})
+            return render(request,'users/register2.html',{'form':form})
         
 #=========================== 계정 찾기 ===========================
 @login_required
