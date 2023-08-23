@@ -1,9 +1,16 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 {% block content %}
-<h2> {% if id %} Edit {% else %} New {% endif %} Post </h2>
-<form method='post' novalidate>
-    {% csrf_token %}
-    {{form.as_p}}
-    <input type="submit" value="Save"/>
-</form>
+<div class="content-section">
+    <form method="post">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Blot Post</legend>
+            {{ form|crispy }}
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-outline-info" type="submit">Post</button>
+        </div>
+    </form>
+</div>
 {% endblock %}

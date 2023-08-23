@@ -29,6 +29,7 @@
 
   <!-- Template Main CSS File -->
   <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/css/album.css' %}" rel="stylesheet">
   <link href="{% static 'assets/css/sb-admin-2.min.css' %}" rel="stylesheet">
 
 
@@ -42,7 +43,7 @@
   ======================================================== -->
 </head>
 
-<body class="bg-gradient-light">
+<body class="bg-light" id="page-top">
   <!-- ======= Navbar ======= -->
   <div class="collapse navbar-collapse custom-navmenu" id="main-navbar">
     <div class="container py-2 py-md-5">
@@ -88,123 +89,6 @@
   </nav>
 
 
-
-
-<!--&lt;!&ndash; Content Wrapper &ndash;&gt;-->
-<!--<div id="content-wrapper" class="d-flex flex-column">-->
-<!--&lt;!&ndash; Main Content &ndash;&gt;-->
-<!--<div id="content">-->
-<!--<nav class="navbar navbar-expand navbar-light bg-gradiant-light topbar mb-4 static-top">-->
-<!--  <ul class="navbar-nav ml-auto">-->
-<!--  &lt;!&ndash; Nav Item - Alerts &ndash;&gt;-->
-<!--  <li class="nav-item dropdown no-arrow mx-1">-->
-<!--    <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-<!--      <i class="fas fa-bell fa-fw"></i>-->
-<!--      &lt;!&ndash; 알람 수 &ndash;&gt;-->
-<!--      <span class="badge badge-danger badge-counter">3+</span>-->
-<!--    </a>-->
-<!--    &lt;!&ndash; Dropdown - Alerts &ndash;&gt;-->
-<!--    <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated&#45;&#45;grow-in" aria-labelledby="alertsDropdown">-->
-<!--      <h6 class="dropdown-header">Alerts Center</h6>-->
-<!--      <a class="dropdown-item d-flex align-items-center" href="#">-->
-<!--        <div class="mr-3">-->
-<!--          <div class="icon-circle bg-primary">-->
-<!--            <i class="fas fa-file-alt text-white"></i>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div>-->
-<!--          <div class="small text-gray-500">December 12, 2019</div>-->
-<!--          <span class="font-weight-bold">A new monthly report is ready to download!</span>-->
-<!--        </div>-->
-<!--      </a>-->
-<!--      <a class="dropdown-item d-flex align-items-center" href="#">-->
-<!--        <div class="mr-3">-->
-<!--          <div class="icon-circle bg-success">-->
-<!--            <i class="fas fa-donate text-white"></i>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div>-->
-<!--          <div class="small text-gray-500">December 7, 2019</div>-->
-<!--          $290.29 has been deposited into your account!-->
-<!--        </div>-->
-<!--      </a>-->
-<!--      <a class="dropdown-item d-flex align-items-center" href="#">-->
-<!--        <div class="mr-3">-->
-<!--          <div class="icon-circle bg-warning">-->
-<!--            <i class="fas fa-exclamation-triangle text-white"></i>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div>-->
-<!--          <div class="small text-gray-500">December 2, 2019</div>-->
-<!--          Spending Alert: We've noticed unusually high spending for your account.-->
-<!--        </div>-->
-<!--      </a>-->
-<!--      <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>-->
-<!--    </div>-->
-<!--  </li>-->
-
-<!--  &lt;!&ndash; Nav Item - Messages &ndash;&gt;-->
-<!--  <li class="nav-item dropdown no-arrow mx-1">-->
-<!--    <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-<!--      <i class="fas fa-envelope fa-fw"></i>-->
-<!--      &lt;!&ndash; Counter - Messages &ndash;&gt;-->
-<!--      <span class="badge badge-danger badge-counter">7</span>-->
-<!--    </a>-->
-<!--    &lt;!&ndash; Dropdown - Messages &ndash;&gt;-->
-<!--    <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated&#45;&#45;grow-in" aria-labelledby="messagesDropdown">-->
-<!--      <h6 class="dropdown-header">Message Center</h6>-->
-<!--      <a class="dropdown-item d-flex align-items-center" href="#">-->
-<!--        <div class="dropdown-list-image mr-3">-->
-<!--          <img class="rounded-circle" src="img/undraw_profile_1.svg" alt="...">-->
-<!--          <div class="status-indicator bg-success"></div>-->
-<!--        </div>-->
-<!--        <div class="font-weight-bold">-->
-<!--          <div class="text-truncate">Hi there! I am wondering if you can help me with a-->
-<!--            problem I've been having.</div>-->
-<!--          <div class="small text-gray-500">Emily Fowler · 58m</div>-->
-<!--        </div>-->
-<!--      </a>-->
-<!--      <a class="dropdown-item d-flex align-items-center" href="#">-->
-<!--        <div class="dropdown-list-image mr-3">-->
-<!--          <img class="rounded-circle" src="img/undraw_profile_2.svg" alt="...">-->
-<!--          <div class="status-indicator"></div>-->
-<!--        </div>-->
-<!--        <div>-->
-<!--          <div class="text-truncate">I have the photos that you ordered last month, how would you like them sent to you?</div>-->
-<!--          <div class="small text-gray-500">Jae Chun · 1d</div>-->
-<!--        </div>-->
-<!--      </a>-->
-<!--      <a class="dropdown-item d-flex align-items-center" href="#">-->
-<!--        <div class="dropdown-list-image mr-3">-->
-<!--          <img class="rounded-circle" src="img/undraw_profile_3.svg" alt="...">-->
-<!--          <div class="status-indicator bg-warning"></div>-->
-<!--        </div>-->
-<!--        <div>-->
-<!--          <div class="text-truncate">Last month's report looks great, I am very happy with the progress so far, keep up the good work!</div>-->
-<!--          <div class="small text-gray-500">Morgan Alvarez · 2d</div>-->
-<!--        </div>-->
-<!--      </a>-->
-<!--      <a class="dropdown-item d-flex align-items-center" href="#">-->
-<!--        <div class="dropdown-list-image mr-3">-->
-<!--          <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60" alt="...">-->
-<!--          <div class="status-indicator bg-success"></div>-->
-<!--        </div>-->
-<!--        <div>-->
-<!--          <div class="text-truncate">Am I a good boy? The reason I ask is because someone told me that people say this to all dogs, even if they aren't good...</div>-->
-<!--          <div class="small text-gray-500">Chicken the Dog · 2w</div>-->
-<!--        </div>-->
-<!--      </a>-->
-<!--      <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>-->
-<!--    </div>-->
-<!--  </li>-->
-<!--  </ul>-->
-<!--</nav>-->
-<!--</div>-->
-<!--</div>-->
-
-
-
-
   <main id="main">
 
         <!-- 메시지  -->
@@ -217,6 +101,7 @@
             {% endfor %}
         </div>
     {% endif %}
+
 
     {% block content %}
     {% endblock content %}
@@ -246,13 +131,15 @@
           <a href="https://ko-kr.facebook.com/"><span class="bi bi-facebook"></span></a>
           <a href="https://www.instagram.com/"><span class="bi bi-instagram"></span></a>
           <a href="https://www.linkedin.com/home?originalSubdomain=kr"><span class="bi bi-linkedin"></span></a>
+          <a href="https://github.com/"><span class="bi bi-github"></span></a>
         </div>
       </div>
     </div>
   </footer>
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <a class="scroll-to-top rounded" href="#page-top"><i class="fas fa-angle-up"></i></a>
 
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <!-- Vendor JS Files -->
   <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
   <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
@@ -261,10 +148,13 @@
   <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
   <script src="{% static 'assets/vendor/jquery/jquery.min.js' %}"></script>
   <script src="{% static 'assets/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
-
+  <script src="{% static 'assets/vendor/holder.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/jquery-slim.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/popper.min.js' %}"></script>
   <!-- Template Main JS File -->
   <script src="{% static 'assets/js/main.js' %}"></script>
   <script src="{% static 'assets/js/sb-admin-2.min.js' %}"></script>
+  <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
 
 </body>
 </html>

@@ -17,12 +17,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from . import views
-from django.contrib.auth.models import User
+from .views import PostListView, PostDetailView, PostCreateView, PostUpdateView, PostDeleteVie
 
 urlpatterns = [
-    path('',views.home, name="home"),
+    path('', PostListView.as_view(), name="home"),
+    path('post/<int:pk>', PostDetailView.as_view(), name="post-detail"),
     path('my_posts',views.about, name="posts"),
-    path('post/create',views.create_post, name='post-create'),
-    path('post/edit/<int:id>',views.edit_post, name="post-edit"),
-    path('post/delete/<int:id>',views.delete_post,name="post-delete"),
+    path('post/create',PostCreateView.as_view(), name='post-create'),
+    path('post/<int:pk>/edit', PostUpdateView.as_view(), name="post-edit"),
+    path('post/<int:pk>/delete', PostDeleteVie.as_view(), name="post-delete"),
+
 ]

@@ -1,17 +1,13 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse
-from django.contrib import messages
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Post
-from .forms import PostForm
 
-from django.contrib.auth.decorators import login_required
-
-# Create your views here.
 
 def about(request):
-    posts=Post.objects.all()
-    context = {'posts' : posts}
-    return render(request, 'blog/me_profile.html', context)
+    # posts=Post.objects.all()
+    # context = {'posts' : posts}
+    return render(request, 'blog/me_profile.html')
 
 def home(request):
     posts = Post.objects.all()
@@ -19,51 +15,44 @@ def home(request):
     return render(request, 'blog/home.html', context)
 
 #====================================
+class PostListView(ListView):
+    model=Post
+    template_name = "blog/home.html"   # <app>/<model>_<viewtype>.html
+    context_object_name = "posts"
+    ordering = ['-published_at']
 
-@login_required
-def create_post(request):
-    if request.method=='GET':
-        context={'form':PostForm()}
-        return render(request, 'blog/post_form.html', context)
-    elif request.method == 'POST':
-        form = PostForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('posts')    #path('', views.home, name="posts"),
-        else:
-            return redirect(request,'blog/post_form.html', {'form':form})
-        
-#====================================
+class PostDetailView(DetailView):
+    model = Post
 
-@login_required
-def edit_post(request,id):
-    queryset = Post.objects.filter(author=request.user)
-    post = get_object_or_404(queryset,id=id)
-    
-    # post=get_object_or_404(Post, id=id) #원본 : URL 패턴과 일치하지 않으면 404로 리턴
-    if request.method=='GET':   # get : http://127.0.0.1:8000/post/edit/1
-        context={'form': PostForm(instance=post),'id':id}
-        return render(request,'blog/post_form.html',context)
-    elif request.method == 'POST':
-        form = PostForm(request.POST, instance=post)
-        if form.is_valid():
-            form.save()
-            messages.success(request,'The post has been updated successfully.')
-            return redirect('posts')
-        else:
-            messages.error(request,'Please correct the following errors:')
-            return render(request,'blog/post_form.html',{'form':form})
-            
-            
-@login_required    
-def delete_post(request,id):
-    queryset = Post.objects.filter(author=request.user)
-    post=get_object_or_404(queryset,id=id)
-    # post=get_object_or_404(Post,id=id)
-    context={'post':post}
-    if request.method == 'GET': # get : http://127.0.0.1:8000/post/delete/1
-        return render(request,'blog/post_confirm_delete.html',context)
-    elif request.method == 'POST':
-        post.delete()
-        messages.success(request,'The post has been deleted successfully.')
-        return redirect('posts')
+class PostCreateView(LoginRequiredMixin, CreateView):
+    model = Post
+    fields = ['title','content']
+
+    def form_valid(self, form): #Post 눌렀을 때 제대로 올라가기 위해서..
+        form.instance.author = self.request.user    #쓰는사람 현재 유저야!
+        return super().form_valid(form) #부모 클래스로 전달
+    # 이것만 하면 define a get_absolute_url method on the Model. 오류 발생 -> Model.py
+
+class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Post
+    fields = ['title','content']
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+    def test_func(self):
+        post=self.get_object()
+        if self.request.user == post.author: # 현재 로그인한 유저가 포스팅 유저와 같다면..
+            return True
+        return False
+
+class PostDeleteVie(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Post
+    success_url = '/'   #삭제하면 홈페이지로 다시 redirect
+
+    def test_func(self):
+        post=self.get_object()
+        if self.request.user == post.author:
+            return True
+        return False
+

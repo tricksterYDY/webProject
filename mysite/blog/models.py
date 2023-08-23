@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from django.urls import reverse #다시 되돌아가기
 
 # Create your models here.
 
@@ -12,6 +13,10 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+    
+    def get_absolute_url(self):
+        return reverse('post-detail',kwargs={'pk':self.pk}) #해당 포스트(primary key)로 리버스
 
-    class Meta:
-        ordering = ['-published_at']
+    # class Meta:
+    #     ordering = ['-published_at']
+
