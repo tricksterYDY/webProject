@@ -16,6 +16,7 @@ Including another URLconf
 """
 from django.urls import path
 from . import views
+<<<<<<< HEAD
 
 urlpatterns = [
     path('', views.PostListView.as_view(), name="home"),
@@ -27,3 +28,21 @@ urlpatterns = [
     path('api/posts/', views.PostList.as_view(), name='post-list'),
     path('api/posts/<int:pk>/', views.PostDetail.as_view(), name='post-detail'),
 ]
+=======
+from .views import (PostListView, PostDetailView, PostCreateView, PostUpdateView, PostDeleteView)
+
+urlpatterns = [
+    path('', PostListView.as_view(), name="home"),
+    path('post/<int:pk>', PostDetailView.as_view(), name="post-detail"),
+    path('my_posts',views.about, name="posts"),
+    path('post/create',PostCreateView.as_view(), name='post-create'),
+    path('post/<int:pk>/edit', PostUpdateView.as_view(), name="post-edit"),
+    path('post/<int:pk>/delete', PostDeleteView.as_view(), name="post-delete"),
+    path('post/<int:pk>/add_comment', views.add_comment, name="add-comment"),
+
+    # path('post/<int:post_id>/comment/create',CommentCreateView.as_view(), name='comment-create'),
+    # path('comment/<int:pk>/update', CommentUpdateView.as_view(), name="comment-edit"),
+    # path('comment/<int:pk>/delete', CommentDeleteView.as_view(), name="comment-delete")
+
+]
+>>>>>>> f94a81f13bd7c43718db3fa3f21787a8696e46f5
